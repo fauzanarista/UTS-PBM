@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_application_2/data/download.dart';
+import 'package:flutter_application_2/data/resep.dart';
+class DetailScreen extends StatelessWidget {
+  final resep reseps;
+
+  const DetailScreen({Key? key, required this.reseps}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(reseps.name),
+        backgroundColor: Color.fromRGBO(222, 184, 135,1),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(30),
+              child: Image.asset(
+                reseps.image,
+                width: 400,
+                height: 250,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 16,
+          ),
+          Text(
+            reseps.name,
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 35,
+                color: Colors.white),
+          ),
+          Text('HTM: ${reseps.htm}',
+          style: TextStyle(fontSize: 30,color: Colors.white)),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              'Description : ' + reseps.tutorial,
+              maxLines: 15,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: (){Navigator.push(context, MaterialPageRoute(builder:(context) => Download(),));}, 
+            child: Text('Beli Recipe'),
+            style:ButtonStyle(
+              backgroundColor: MaterialStatePropertyAll(Color.fromRGBO(222, 184, 135,1))
+            )
+          )
+        ],
+      ),
+    );
+  }
+}
